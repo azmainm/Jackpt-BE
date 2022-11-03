@@ -15,6 +15,7 @@ class ProductService
 
     public function index()
     {
-        dd(1);
+        $products =  $this->productRepositoryInterface->where('user_id', 1)->get();
+        dd($products);
     }
 }
