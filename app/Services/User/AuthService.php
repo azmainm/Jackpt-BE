@@ -2,8 +2,9 @@
 
 namespace App\Services\User;
 
+
 use App\Interfaces\UserRepositoryInterface;
-use App\Repository\UserRepository;
+
 
 class AuthService
 {
