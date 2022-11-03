@@ -5,6 +5,7 @@ namespace App\Services\Product;
 use App\Http\Resources\ProductResource;
 use App\Interfaces\ProductRepositoryInterface;
 use Illuminate\Support\Str;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class ProductService
 {
@@ -35,10 +36,12 @@ class ProductService
             "description" => $data->description,
             "variant" => $data->variant,
             "color" => $data->color,
-            "product_image" => $data->product_image,
-            "thumbnail_image" => $data->thumbnail_image,
-            "short_image" => $data->short_image,
+            "product_image" => $data->product_image ? $this->storeProductImage($data->product_image) : null,
+            "thumbnail_image" => $data->thumbnail_image ? $this->storeProductImage($data->thumbnail_image) : null,
+            "short_image" => $data->short_image ? $this->storeProductImage($data->short_image) : null,
         ];
+
+
     }
 
     private function makeProductUpdateData($data)
@@ -51,10 +54,20 @@ class ProductService
         if (isset($data->description)) $dataArray['description'] = $data->description;
         if (isset($data->variant)) $dataArray['variant'] = $data->variant;
         if (isset($data->color)) $dataArray['color'] = $data->color;
-        if (isset($data->product_image)) $dataArray['product_image'] = $data->product_image;
-        if (isset($data->thumbnail_image)) $dataArray['thumbnail_image'] = $data->thumbnail_image;
-        if (isset($data->short_image)) $dataArray['short_image'] = $data->short_image;
+        if (isset($data->product_image)) $dataArray['product_image'] = $this->storeProductImage($data->product_image);
+        if (isset($data->thumbnail_image)) $dataArray['thumbnail_image'] = $this->storeProductImage($data->thumbnail_image);
+        if (isset($data->short_image)) $dataArray['short_image'] = $this->storeProductImage($data->short_image);
         return $dataArray;
+    }
+
+    private function storeProductImage($base64Image)
+    {
+        $slashIndex = strpos($base64Image, '/');
+        $semicolonIndex = strpos($base64Image, ';');
+        $extension = substr($base64Image, $slashIndex + 1, ($semicolonIndex - $slashIndex) - 1);
+        $name = public_path('product/') . time() . '.' . $extension;
+        Image::make($base64Image)->save($name);
+        return $name;
     }
 
     public function storeProduct($data, $id)
