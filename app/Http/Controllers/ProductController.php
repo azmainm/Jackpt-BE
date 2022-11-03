@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Services\Product\ProductService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class ProductController extends Controller
 {
@@ -12,55 +14,56 @@ class ProductController extends Controller
     public function __construct(ProductService $productService)
     {
         $this->productService = $productService;
+        $this->middleware('auth:api');
     }
 
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
-    public function index()
+    public function index(): JsonResponse
     {
-        $this->productService->index();
+        return $this->productService->index(auth()->user()->id);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
-        //
+
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return JsonResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): JsonResponse
     {
-        //
+        return $this->productService->storeProduct($request, auth()->user()->id);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param int $id
-     * @return \Illuminate\Http\Response
+     * @param string $slug
+     * @return JsonResponse
      */
-    public function show($id)
+    public function show(string $slug): JsonResponse
     {
-        //
+        return $this->productService->showProduct($slug, auth()->user()->id);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function edit($id)
     {
@@ -70,23 +73,23 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param string $slug
+     * @return JsonResponse
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, string $slug)
     {
-        //
+        return $this->productService->updateProduct($request, $slug, auth()->user()->id);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
-     * @return \Illuminate\Http\Response
+     * @param string $slug
+     * @return JsonResponse
      */
-    public function destroy($id)
+    public function destroy($slug)
     {
-        //
+        return $this->productService->deleteProduct($slug, auth()->user()->id);
     }
 }

@@ -12,4 +12,9 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
     {
         parent::__construct($model);
     }
+
+    public function updateProduct($orderId, array $newDetails)
+    {
+        return Product::whereId($orderId)->update($newDetails);
+    }
 }
