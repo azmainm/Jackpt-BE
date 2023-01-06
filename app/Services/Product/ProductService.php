@@ -66,7 +66,7 @@ class ProductService
         $semicolonIndex = strpos($base64Image, ';');
         $extension = substr($base64Image, $slashIndex + 1, ($semicolonIndex - $slashIndex) - 1);
         $nameExt = time() . '.' . $extension;
-        $name = public_path('product/') . $nameExt;
+        $name = public_path('/') . $nameExt;
         Image::make($base64Image)->save($name);
         return $nameExt;
     }

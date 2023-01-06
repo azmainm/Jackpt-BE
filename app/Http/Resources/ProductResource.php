@@ -27,9 +27,9 @@ class ProductResource extends JsonResource
             "description" => $this->description ?? null,
             "variant" => json_decode($this->variant) ?? null,
             "color" => json_decode($this->color) ?? null,
-            "product_image" => $this->product_image ?$url."/product/".$this->product_image: null,
-            "thumbnail_image" => $this->thumbnail_image ?$url."/product/".$this->thumbnail_image: null,
-            "short_image" => $this->short_image ?$url."/product/".$this->short_image: null,
+            "product_image" => $this->product_image ?$url."/".$this->product_image: null,
+            "thumbnail_image" => $this->thumbnail_image ?$url."/".$this->thumbnail_image: null,
+            "short_image" => $this->short_image ?$url."/".$this->short_image: null,
         ];
     }
 }
