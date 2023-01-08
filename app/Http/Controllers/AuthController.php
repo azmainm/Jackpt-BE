@@ -32,7 +32,6 @@ class AuthController extends Controller
      * Get a JWT via given credentials.
      *
      * @return JsonResponse
-     * @throws ValidationException
      */
     public function login(Request $request)
     {
@@ -46,15 +45,15 @@ class AuthController extends Controller
     /**
      * Register a User.
      *
+     * @param Request $request
      * @return JsonResponse
-     * @throws ValidationException
      */
-    public function register(Request $request)
+    public function register(Request $request): JsonResponse
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|between:2,100',
             'email' => 'required|string|email|max:100|unique:users',
-            'password' => 'required|string|confirmed|min:6',
+            'password' => 'required|string|min:6',
         ]);
         return $this->authService->register($validator,$request->password);
     }
