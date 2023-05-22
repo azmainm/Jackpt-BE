@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Interfaces\UserRepositoryInterface;
+use App\Repository\UserRepository;
 use App\Services\User\AuthService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -15,16 +16,19 @@ class AuthController extends Controller
     /**
      * @var AuthService
      */
-    private $authService;
+
 
     /**
      * Create a new AuthController instance.
      *
      * @return void
      */
-    public function __construct(AuthService $authService)
+    public function __construct(
+        protected AuthService    $authService,
+        protected UserRepository $user,
+    )
     {
-        $this->authService = $authService;
+
         $this->middleware('auth:api', ['except' => ['login', 'register']]);
     }
 
@@ -55,7 +59,7 @@ class AuthController extends Controller
             'email' => 'required|string|email|max:100|unique:users',
             'password' => 'required|string|min:6',
         ]);
-        return $this->authService->register($validator,$request->password);
+        return $this->authService->register($validator, $request->password);
     }
 
     /**
