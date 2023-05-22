@@ -1,3 +1,4 @@
+oooo
 1. Install Composer 
 2. Generate JWT secret in .env file
 3. Provide Proper APP_URL 

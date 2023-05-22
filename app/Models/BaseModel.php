@@ -1,15 +1,20 @@
 <?php
 
 namespace App\Models;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class BaseModel extends Model
 {
     use HasFactory;
-    public static  $savedEventClass = null;
+
+    public static $savedEventClass = null;
+
     public static $createdEventClass = null;
+
     public static $updatedEventClass = null;
+
     public static $deleteEventClass = null;
 
     private $blockEvent = false;
@@ -25,7 +30,9 @@ class BaseModel extends Model
         }
         if (property_exists(new static, 'updatedEventClass') && static::$updatedEventClass) {
             self::updated(function (BaseModel $model) {
-                if (!$model->blockEvent) event(new static::$updatedEventClass(new static($model->getOriginal()), $model));
+                if (! $model->blockEvent) {
+                    event(new static::$updatedEventClass(new static($model->getOriginal()), $model));
+                }
                 $model->setBlockEvent(false);
             });
         }
@@ -44,6 +51,7 @@ class BaseModel extends Model
     public function setBlockEvent($blockEvent)
     {
         $this->blockEvent = $blockEvent;
+
         return $this;
     }
 

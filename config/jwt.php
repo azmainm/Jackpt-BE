@@ -16,7 +16,7 @@ return [
     | JWT Authentication Secret
     |--------------------------------------------------------------------------
     |
-    | Don't forget to set this in your .env file, as it will be used to sign
+    | Don't forget to set this in your .env.example file, as it will be used to sign
     | your tokens. A helper command is provided for this:
     | `php artisan jwt:secret`
     |
@@ -101,7 +101,7 @@ return [
     |
     */
 
-    'ttl' => env('JWT_TTL', 60),
+    'ttl' => env('JWT_TTL', null),
 
     /*
     |--------------------------------------------------------------------------
@@ -150,7 +150,7 @@ return [
     'required_claims' => [
         'iss',
         'iat',
-        'exp',
+        //  'exp',
         'nbf',
         'sub',
         'jti',

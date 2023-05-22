@@ -17,6 +17,7 @@ class BaseRepository implements BaseRepositoryInterface
     public function setModel($model)
     {
         $this->model = $model;
+
         return $this;
     }
 
