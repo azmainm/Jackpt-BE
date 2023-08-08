@@ -1,20 +1,8 @@
 <?php
 
-use App\Http\Controllers\ReportController;
-use App\Http\Controllers\v1\AnnualWheelController;
 use App\Http\Controllers\v1\AuthController;
-use App\Http\Controllers\v1\CapTableController;
-use App\Http\Controllers\v1\CapTableOwnerController;
-use App\Http\Controllers\v1\CompanyInformationController;
-use App\Http\Controllers\v1\CountryController;
-use App\Http\Controllers\v1\EventController;
-use App\Http\Controllers\v1\ExcelController;
-use App\Http\Controllers\v1\InvitationController;
 use App\Http\Controllers\v1\MailController;
 use App\Http\Controllers\v1\MailVerificationController;
-use App\Http\Controllers\v1\RecentCaptableController;
-use App\Http\Controllers\v1\SubscriberController;
-use App\Http\Controllers\v1\TransactionController;
 use App\Http\Controllers\v1\UserExistController;
 use App\Http\Controllers\v1\UserProfileController;
 use Illuminate\Support\Facades\Route;

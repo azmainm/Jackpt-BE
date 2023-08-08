@@ -17,17 +17,17 @@ class UserRepository extends Repository
         return $this->model->where();
     }
 
-    public function checkUserExist(string $email): User|null
+    public function checkUserExist(string $email): ?User
     {
         return $this->model->where('email', $email)->first();
     }
 
-    public function checkStatus($email): User|null
+    public function checkStatus($email): ?User
     {
         return $this->model->where('email', $email)->first(['status']);
     }
 
-    public function checkUserExistByKey(string $key): User|null
+    public function checkUserExistByKey(string $key): ?User
     {
         return $this->model->where('secret_key', $key)->first(['id', 'secret_key', 'status']);
     }
