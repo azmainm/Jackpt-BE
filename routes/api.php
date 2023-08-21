@@ -33,3 +33,5 @@ Route::group(['middleware' => ['auth:api', 'php.ini'], 'prefix' => 'v1', 'namesp
     Route::post('/refresh', [AuthController::class, 'refresh'])->name('refresh.token');
     Route::get('/user-profile', [UserProfileController::class, 'userProfile'])->name('user.profile');
 });
+
+Route::post('posts', [\App\Http\Controllers\v1\PostController::class, 'post_ads']);
