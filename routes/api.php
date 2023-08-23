@@ -34,4 +34,13 @@ Route::group(['middleware' => ['auth:api', 'php.ini'], 'prefix' => 'v1', 'namesp
     Route::get('/user-profile', [UserProfileController::class, 'userProfile'])->name('user.profile');
 });
 
+Route::get('posts',[App\Http\Controllers\v1\PostController::class,'index']);
+
 Route::post('posts', [\App\Http\Controllers\v1\PostController::class, 'post_ads']);
+
+Route::get('posts/{id}',[App\Http\Controllers\v1\PostController::class,'show']);
+
+Route::get('posts/{id}',[App\Http\Controllers\v1\PostController::class,'edit']);
+Route::put('posts/{id}',[App\Http\Controllers\v1\PostController::class,'update']);
+Route::delete('posts/{id}',[App\Http\Controllers\v1\PostController::class,'destroy']);
+
