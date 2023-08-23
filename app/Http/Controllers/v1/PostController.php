@@ -13,16 +13,11 @@ class PostController extends Controller
     {
         $posts=Post::all();
         if($posts->count() > 0){
-            return response()->json([
-                'status' => 200,
-                'posts' => $posts
-            ], 200);
-        }else{
-            return response()->json([
-                'status'=>404,
-                'message'=>'No records Found'
-            ],404);
+            return $this->success(data:$posts);
+            
         }
+        return $this->error("Not Found",404)
+        
     }
     public function post_ads(Request $request)
     {
