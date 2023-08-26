@@ -2,14 +2,16 @@
 
 namespace App\Models;
 
+use function App\Helpers\storeUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use function App\Helpers\storeUuid;
 
 class Post extends Model
 {
     use HasFactory;
+
     protected $table = 'posts';
+
     public static function boot()
     {
         parent::boot();
@@ -17,6 +19,7 @@ class Post extends Model
             storeUuid($model);
         });
     }
+
     protected $fillable = [
         'uuid',
         'user_id',
@@ -24,7 +27,6 @@ class Post extends Model
         'product_name',
         'product_details',
         'category',
-        'type'
+        'type',
     ];
-
 }

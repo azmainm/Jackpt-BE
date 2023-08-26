@@ -2,24 +2,27 @@
 
 namespace App\Http\Controllers\v1;
 
+use App\Constants\ResponseMessages;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
-use Aws\Api\Validator;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
     public function index()
     {
-        $posts=Post::all();
-        if($posts->count() > 0){
-            return $this->success(data:$posts);
-            
+        $posts = Post::all();
+        if ($posts->count() > 0) {
+            return $this->success(data: $posts);
+
         }
-        return $this->error("Not Found",404)
-        
+
+        return $this->error('Not Found', 404);
+
     }
-    public function post_ads(Request $request)
+
+    public function store(Request $request): JsonResponse
     {
         $post = Post::create([
             'uuid' => $request->uuid,
@@ -30,57 +33,27 @@ class PostController extends Controller
             'category' => $request->category,
             'type' => $request->type,
         ]);
-        if($post){
-            return response()->json([
-                'status' => 200,
-                'message' => "Successfully Posted"
-            ], 200);
-        }else{
-            return response()->json([
-                'status' => 500,
-                'message' => "Something went wrong!"
-            ], 500);
+
+        return $this->success(data: $post);
+    }
+
+    public function show($id): JsonResponse
+    {
+        $post = Post::find($id);
+        if (! $post) {
+            return $this->error(ResponseMessages::NOT_FOUND, 404);
         }
+
+        return $this->success(data: $post);
     }
-        
-public function show($id)
-{
-    $post = Post::find($id);
-    if($post){
-        return response()->json([
-            'status' => 200,
-            'message' => $post
-        ], 200);  
 
-    }else{
-        return response()->json([
-            'status' =>500,
-            'message'=> "No such post found!"
-        ],404);
-    }
-}
-public function edit($id)
-{
-    $post = Post::find($id);
-    if($post){
-        return response()->json([
-            'status' => 200,
-            'message' => $post
-        ], 200);  
+    public function update(Request $request, int $id): JsonResponse
+    {
+        $post = Post::find($id);
 
-    }else{
-        return response()->json([
-            'status' =>500,
-            'message'=> "No such post found!"
-        ],404);
-    }  
-}
-public function update(Request $request, int $id )
-{
-    $post = Post::find($id);
-   
-
-    if ($post) {
+        if (! $post) {
+            return $this->error(ResponseMessages::NOT_FOUND, 404);
+        }
         $post->update([
             'user_id' => $request->user_id,
             'image' => $request->image,
@@ -89,44 +62,20 @@ public function update(Request $request, int $id )
             'category' => $request->category,
             'type' => $request->type,
         ]);
-        return response()->json([
-            'status' => 200,
-            'message' => "Post updated"
-        ], 200);
-    } else {
-        return response()->json([
-            'status' => 500,
-            'message' => "Something Goes Wrong"
-        ], 200);
+
+        return $this->success();
+
     }
 
-
-}
-
-
-public function destroy($id)
-{
-    $post =Post::find($id);
-    if($post){
+    public function destroy($id): JsonResponse
+    {
+        $post = Post::find($id);
+        if (! $post) {
+            return $this->error(ResponseMessages::NOT_FOUND, 404);
+        }
         $post->delete();
 
-    }else{
-
-        return response()->json([
-            'status' => 500,
-            'message' => "Something Goes Wrong"
-        ], 200);
+        return $this->success();
 
     }
-
-}
-
-
-
-
-
-
-
-
-
 }
