@@ -17,14 +17,11 @@ class PostController extends Controller
             return $this->success(data: $posts);
 
         }
-<<<<<<< Updated upstream
 
         return $this->error('Not Found', 404);
 
-=======
         return $this->error("Not Found",404);
         
->>>>>>> Stashed changes
     }
 
     public function store(Request $request): JsonResponse
