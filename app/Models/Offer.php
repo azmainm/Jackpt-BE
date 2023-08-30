@@ -6,11 +6,11 @@ use function App\Helpers\storeUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Post extends Model
+class Offer extends Model
 {
     use HasFactory;
 
-    protected $table = 'posts';
+    protected $table = 'offers';
 
     public static function boot()
     {
@@ -22,16 +22,14 @@ class Post extends Model
 
     protected $fillable = [
         'uuid',
-        'user_id',
-        'image',
-        'product_name',
-        'product_details',
-        'category',
-        'type',
+        'post_id',
+        'service_name',
+        'service_details',
+        
     ];
 
-    function offers()  
+    function post()  
     {
-        return  $this->hasMany(Offer::class);
+        return  $this->belongsTo(Post::class);
     }
 }
