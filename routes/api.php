@@ -3,6 +3,7 @@
 use App\Http\Controllers\v1\AuthController;
 use App\Http\Controllers\v1\MailController;
 use App\Http\Controllers\v1\MailVerificationController;
+use App\Http\Controllers\v1\PostController;
 use App\Http\Controllers\v1\UserExistController;
 use App\Http\Controllers\v1\UserProfileController;
 use Illuminate\Support\Facades\Route;
@@ -34,12 +35,10 @@ Route::group(['middleware' => ['auth:api', 'php.ini'], 'prefix' => 'v1', 'namesp
     Route::get('/user-profile', [UserProfileController::class, 'userProfile'])->name('user.profile');
 });
 
-Route::get('posts', [App\Http\Controllers\v1\PostController::class, 'index']);
-
-Route::post('posts', [\App\Http\Controllers\v1\PostController::class, 'store']);
-
-Route::get('posts/{id}', [App\Http\Controllers\v1\PostController::class, 'show']);
-
-Route::get('posts/{id}', [App\Http\Controllers\v1\PostController::class, 'edit']);
-Route::put('posts/{id}', [App\Http\Controllers\v1\PostController::class, 'update']);
-Route::delete('posts/{id}', [App\Http\Controllers\v1\PostController::class, 'destroy']);
+Route::group(['middleware' => ['auth:api', 'php.ini'], 'prefix' => 'v1/posts'], function () {
+    Route::get('', [PostController::class, 'index']);
+    Route::post('', [PostController::class, 'store']);
+    Route::get('{id}', [PostController::class, 'show']);
+    Route::put('{id}', [PostController::class, 'update']);
+    Route::delete('{id}', [PostController::class, 'destroy']);
+});

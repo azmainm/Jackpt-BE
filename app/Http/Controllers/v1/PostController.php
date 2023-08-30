@@ -4,29 +4,26 @@ namespace App\Http\Controllers\v1;
 
 use App\Constants\ResponseMessages;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\PostResource;
 use App\Models\Post;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    public function index()
+    public function index(): JsonResponse
     {
-        $posts = Post::all();
+        $posts = Post::where('user_id', auth()->user()->id)->get();
         if ($posts->count() > 0) {
-            return $this->success(data: $posts);
-
+            return $this->success(data: PostResource::collection($posts));
         }
-
         return $this->error('Not Found', 404);
-
     }
 
     public function store(Request $request): JsonResponse
     {
         $post = Post::create([
-            'uuid' => $request->uuid,
-            'user_id' => $request->user_id,
+            'user_id' => auth()->user()->id,
             'image' => $request->image,
             'product_name' => $request->product_name,
             'product_details' => $request->product_details,
@@ -34,13 +31,13 @@ class PostController extends Controller
             'type' => $request->type,
         ]);
 
-        return $this->success(data: $post);
+        return $this->success(data: new PostResource($post));
     }
 
     public function show($id): JsonResponse
     {
         $post = Post::find($id);
-        if (! $post) {
+        if (!$post) {
             return $this->error(ResponseMessages::NOT_FOUND, 404);
         }
 
@@ -51,7 +48,7 @@ class PostController extends Controller
     {
         $post = Post::find($id);
 
-        if (! $post) {
+        if (!$post) {
             return $this->error(ResponseMessages::NOT_FOUND, 404);
         }
         $post->update([
@@ -70,12 +67,11 @@ class PostController extends Controller
     public function destroy($id): JsonResponse
     {
         $post = Post::find($id);
-        if (! $post) {
+        if (!$post) {
             return $this->error(ResponseMessages::NOT_FOUND, 404);
         }
         $post->delete();
 
         return $this->success();
-
     }
 }
