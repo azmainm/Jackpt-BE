@@ -9,6 +9,7 @@ use App\Models\Offer;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
+
 class OfferController extends Controller
 {
     public function update(Request $request, $uuid): JsonResponse
