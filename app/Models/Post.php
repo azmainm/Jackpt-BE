@@ -28,9 +28,12 @@ class Post extends Model
         'product_details',
         'category',
         'type',
+        'division',
+        'district',
+        'area',
     ];
 
-    function offers()  
+    function offers()
     {
         return  $this->hasMany(Offer::class);
     }

@@ -30,6 +30,9 @@ class PostController extends Controller
             'product_details' => $request->product_details,
             'category' => $request->category,
             'type' => $request->type,
+            'division' => $request->division,
+            'district' => $request->district,
+            'area' => $request->area,
         ]);
 
         return $this->success(data: new PostResource($post));
@@ -59,6 +62,9 @@ class PostController extends Controller
             'product_details' => $request->product_details,
             'category' => $request->category,
             'type' => $request->type,
+            'division' => $request->division,
+            'district' => $request->district,
+            'area' => $request->area,
         ]);
 
         return $this->success();
@@ -76,5 +82,5 @@ class PostController extends Controller
         return $this->success();
     }
 
-    
+
 }

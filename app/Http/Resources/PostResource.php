@@ -20,6 +20,9 @@ class PostResource extends JsonResource
             'product_details' => $this->product_details,
             'category' => $this->category,
             'type' => $this->type,
+            'division' => $this->division,
+            'district' => $this->district,
+            'area' => $this->area,
         ];
     }
 }
