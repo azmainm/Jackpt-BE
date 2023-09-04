@@ -23,12 +23,13 @@ class Offer extends Model
     protected $fillable = [
         'uuid',
         'post_id',
+        'user_id',
         'service_name',
         'service_details',
-        
+
     ];
 
-    function post()  
+    function post()
     {
         return  $this->belongsTo(Post::class);
     }

@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('offers', function (Blueprint $table) {
             $table->id();
             $table->uuid();
-            $table->foreignId('post_id');
+            $table->string('user_id')->nullable();
+            $table->string('post_id');
             $table->string('service_name')->nullable();
             $table->longText('service_details')->nullable();
             $table->timestamps();

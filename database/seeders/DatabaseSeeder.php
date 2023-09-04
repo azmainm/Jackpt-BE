@@ -14,9 +14,9 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            CountrySeeder::class,
+//            CountrySeeder::class,
             UserSeeder::class,
-            AnnualWheelRingSeeder::class,
+//            AnnualWheelRingSeeder::class,
         ]);
     }
 }
