@@ -5,12 +5,9 @@ namespace App\Http\Controllers\v1;
 use App\Constants\ResponseMessages;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\OfferResource;
-use App\Http\Resources\PostResource;
 use App\Models\Offer;
-use App\Models\Post;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-
 
 class OfferController extends Controller
 {
@@ -20,9 +17,11 @@ class OfferController extends Controller
         if ($offers->count() > 0) {
             return $this->success(data: OfferResource::collection($offers));
         }
+
         return $this->error('Not Found', 404);
 
     }
+
     public function store(Request $request): JsonResponse
     {
         $offer = Offer::create([
@@ -35,12 +34,11 @@ class OfferController extends Controller
         return $this->success(data: new OfferResource($offer));
     }
 
-
     public function update(Request $request, $uuid): JsonResponse
     {
         $offer = Offer::where('user_id', auth()->user()->id)->where('uuid', $uuid)->first();
 
-        if (!$offer) {
+        if (! $offer) {
             return $this->error(ResponseMessages::NOT_FOUND, 404);
         }
         $offer->update([

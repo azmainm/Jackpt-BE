@@ -5,13 +5,14 @@ namespace App\Domains\User\Models;
 use App\Domains\CapTable\Models\CapTable;
 use App\Domains\CapTable\Models\CapTableUserOwner;
 use App\Domains\Invitation\Models\Invitation;
-use function App\Helpers\storeUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Tymon\JWTAuth\Contracts\JWTSubject;
+
+use function App\Helpers\storeUuid;
 
 class User extends Authenticatable implements JWTSubject
 {

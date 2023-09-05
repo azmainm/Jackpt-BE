@@ -3,9 +3,10 @@
 namespace Database\Seeders;
 
 use App\Domains\User\Repositories\UserRepository;
-use function App\Helpers\randomString;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+
+use function App\Helpers\randomString;
 
 class UserSeeder extends Seeder
 {

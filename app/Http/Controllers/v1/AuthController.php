@@ -7,11 +7,12 @@ use App\Domains\Mail\MailService;
 use App\Domains\User\Repositories\UserRepository;
 use App\Domains\User\Services\AuthService;
 use App\Enums\EmailEnum;
-use function App\Helpers\randomString;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+
+use function App\Helpers\randomString;
 
 class AuthController extends Controller
 {

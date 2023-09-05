@@ -3,13 +3,21 @@
 namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Http\Resources\IssueResource;
 use App\Models\Issue;
 use Illuminate\Http\JsonResponse;
-use App\Constants\ResponseMessages;
+use Illuminate\Http\Request;
+
 class IssueController extends Controller
-{
+{ public function index(): JsonResponse
+    {
+        $issues = Issue::where('user_id', auth()->user()->id)->get();
+        if ($issues->count() > 0) {
+            return $this->success(data: IssueResource::collection($issues));
+        }
+        return $this->error('Not Found', 404);
+
+    }
     public function store(Request $request): JsonResponse
     {
         $issue = Issue::create([
