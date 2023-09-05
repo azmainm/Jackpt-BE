@@ -1,15 +1,14 @@
 <?php
 
 use App\Http\Controllers\v1\AuthController;
+use App\Http\Controllers\v1\IssueController;
 use App\Http\Controllers\v1\MailController;
 use App\Http\Controllers\v1\MailVerificationController;
-use App\Http\Controllers\v1\PostController;
 use App\Http\Controllers\v1\OfferController;
+use App\Http\Controllers\v1\PostController;
 use App\Http\Controllers\v1\UserExistController;
 use App\Http\Controllers\v1\UserProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\v1\IssueController;
-
 
 /*
 |--------------------------------------------------------------------------

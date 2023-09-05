@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+
 use function App\Helpers\storeUuid;
 
 class Issue extends Model
@@ -19,9 +20,10 @@ class Issue extends Model
             storeUuid($model);
         });
     }
+
     protected $fillable = [
         'title',
         'description',
-        'is_solved'
+        'is_solved',
     ];
 }

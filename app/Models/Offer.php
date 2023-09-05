@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use function App\Helpers\storeUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+
+use function App\Helpers\storeUuid;
 
 class Offer extends Model
 {
@@ -29,8 +30,8 @@ class Offer extends Model
 
     ];
 
-    function post()
+    public function post()
     {
-        return  $this->belongsTo(Post::class);
+        return $this->belongsTo(Post::class);
     }
 }

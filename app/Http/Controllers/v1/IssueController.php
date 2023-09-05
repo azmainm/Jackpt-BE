@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Http\Resources\IssueResource;
 use App\Models\Issue;
 use Illuminate\Http\JsonResponse;
-use App\Constants\ResponseMessages;
+use Illuminate\Http\Request;
+
 class IssueController extends Controller
 {
     public function store(Request $request): JsonResponse

@@ -2,11 +2,12 @@
 
 namespace App\Http\Middleware;
 
-use function App\Helpers\getIp;
 use Closure;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
+
+use function App\Helpers\getIp;
 
 class IpWhitelistMiddleware
 {

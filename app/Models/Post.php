@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use function App\Helpers\storeUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+
+use function App\Helpers\storeUuid;
 
 class Post extends Model
 {
@@ -33,8 +34,8 @@ class Post extends Model
         'area',
     ];
 
-    function offers()
+    public function offers()
     {
-        return  $this->hasMany(Offer::class, 'post_id', 'uuid');
+        return $this->hasMany(Offer::class, 'post_id', 'uuid');
     }
 }
