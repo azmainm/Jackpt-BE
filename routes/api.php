@@ -8,6 +8,8 @@ use App\Http\Controllers\v1\OfferController;
 use App\Http\Controllers\v1\UserExistController;
 use App\Http\Controllers\v1\UserProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\v1\IssueController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -48,4 +50,9 @@ Route::group(['middleware' => ['auth:api', 'php.ini'], 'prefix' => 'v1/offers'],
     Route::get('', [OfferController::class, 'view']);
     Route::post('', [OfferController::class, 'store']);
     Route::put('{id}', [OfferController::class, 'update']);
+});
+
+Route::group(['middleware' => ['auth:api', 'php.ini'], 'prefix' => 'v1/issues'], function () {
+    Route::get('', [OfferController::class, 'view']);
+    Route::post('', [OfferController::class, 'store']);
 });
