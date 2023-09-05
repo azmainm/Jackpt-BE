@@ -48,9 +48,9 @@ class PostController extends Controller
         return $this->success(data: new PostResource($post));
     }
 
-    public function update(Request $request, int $id): JsonResponse
+    public function update(Request $request, $uuid): JsonResponse
     {
-        $post = Post::find($id);
+        $post = Post::where('user_id', auth()->user()->id)->where('uuid', $uuid)->first();
 
         if (!$post) {
             return $this->error(ResponseMessages::NOT_FOUND, 404);
@@ -71,9 +71,9 @@ class PostController extends Controller
 
     }
 
-    public function destroy($id): JsonResponse
+    public function destroy($uuid): JsonResponse
     {
-        $post = Post::find($id);
+        $post = Post::where('user_id', auth()->user()->id)->where('uuid', $uuid)->first();
         if (!$post) {
             return $this->error(ResponseMessages::NOT_FOUND, 404);
         }
@@ -81,10 +81,5 @@ class PostController extends Controller
 
         return $this->success();
     }
-
-
-
-
-
 
 }

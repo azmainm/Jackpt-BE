@@ -13,7 +13,7 @@ class IssueController extends Controller
     public function store(Request $request): JsonResponse
     {
         $issue = Issue::create([
-            'user_id' => auth()->user()->id,
+//            'user_id' => auth()->user()->id,
             'title' => $request->title,
             'description' => $request->description,
             'is_solved' => $request->is_solved,

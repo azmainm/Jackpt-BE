@@ -12,13 +12,13 @@ class Issue extends Model
 
     protected $table = 'issues';
 
-    public static function boot()
-    {
-        parent::boot();
-        self::creating(function ($model) {
-            storeUuid($model);
-        });
-    }
+//    public static function boot()
+//    {
+//        parent::boot();
+//        self::creating(function ($model) {
+//            storeUuid($model);
+//        });
+//    }
     protected $fillable = [
         'title',
         'description',

@@ -53,6 +53,6 @@ Route::group(['middleware' => ['auth:api', 'php.ini'], 'prefix' => 'v1/offers'],
 });
 
 Route::group(['middleware' => ['auth:api', 'php.ini'], 'prefix' => 'v1/issues'], function () {
-    Route::get('', [IssueController::class, 'view']);
+//    Route::get('', [IssueController::class, 'view']);
     Route::post('', [IssueController::class, 'store']);
 });
