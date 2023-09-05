@@ -35,6 +35,6 @@ class Post extends Model
 
     function offers()
     {
-        return  $this->hasMany(Offer::class);
+        return  $this->hasMany(Offer::class, 'post_id', 'uuid');
     }
 }

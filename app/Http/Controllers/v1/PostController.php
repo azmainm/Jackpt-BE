@@ -40,12 +40,12 @@ class PostController extends Controller
 
     public function show($id): JsonResponse
     {
-        $post = Post::find($id);
+        $post = Post::where('uuid',$id)->first();
         if (!$post) {
             return $this->error(ResponseMessages::NOT_FOUND, 404);
         }
 
-        return $this->success(data: $post);
+        return $this->success(data: new PostResource($post));
     }
 
     public function update(Request $request, int $id): JsonResponse
