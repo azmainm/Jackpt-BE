@@ -25,10 +25,10 @@ Route::group(['middleware' => ['php.ini'], 'prefix' => 'v1', 'namespace' => 'v1'
     Route::post('/login', [AuthController::class, 'login'])->name('user.login');
     Route::post('/register', [AuthController::class, 'register'])->name('user.register');
     Route::get('/user-exists', [UserExistController::class, 'checkUserExist']);
-    Route::post('/send-mail', [MailController::class, 'sendRegisterMail']);
+    Route::post('/send-sendMail', [MailController::class, 'sendRegisterMail']);
     Route::post('/forgot-password', [AuthController::class, 'checkForgotPassword']);
     Route::put('/reset-password', [AuthController::class, 'resetPassword']);
-    Route::get('/verify-mail', [MailVerificationController::class, 'verifyEmail']);
+    Route::get('/verify-sendMail', [MailVerificationController::class, 'verifyEmail']);
 });
 
 Route::group(['middleware' => ['auth:api', 'php.ini'], 'prefix' => 'v1', 'namespace' => 'v1'], function () {
@@ -55,3 +55,9 @@ Route::group(['middleware' => ['auth:api', 'php.ini'], 'prefix' => 'v1/issues'],
 //    Route::get('', [IssueController::class, 'view']);
     Route::post('', [IssueController::class, 'store']);
 });
+
+//Route::group(['middleware' => ['auth:api', 'php.ini'], 'prefix' => 'v1/mails'], function () {
+//    Route::post('',[\App\Http\Controllers\v1\SendMailController::class, 'sendMail']);
+//});
+
+Route::post('/mails',[\App\Http\Controllers\v1\SendMailController::class, 'sendMail']);
