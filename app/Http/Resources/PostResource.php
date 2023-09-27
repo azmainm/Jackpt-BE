@@ -23,6 +23,7 @@ class PostResource extends JsonResource
             'type' => $this->type,
             'division' => $this->division,
             'district' => $this->district,
+            'price' => $this->price,
             'area' => $this->area,
             'offers' => OfferResource::collection($this->offers),
         ];

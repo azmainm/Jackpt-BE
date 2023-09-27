@@ -20,6 +20,7 @@ return new class extends Migration
             $table->longText('product_details')->nullable();
             $table->string('category')->nullable();
             $table->string('type')->nullable();
+            $table->string('price')->nullable();
             $table->timestamps();
         });
     }
