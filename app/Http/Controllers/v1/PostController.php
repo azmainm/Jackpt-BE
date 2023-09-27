@@ -14,12 +14,7 @@ class PostController extends Controller
     public function index(): JsonResponse
     {
         $posts = Post::where('user_id', auth()->user()->id)->get();
-        if ($posts->count() > 0) {
-            return $this->success(data: PostResource::collection($posts));
-        }
-
-        return $this->error('Not Found', 404);
-
+        return $this->success(data: PostResource::collection($posts));
     }
 
     public function store(Request $request): JsonResponse
@@ -42,7 +37,7 @@ class PostController extends Controller
     public function show($id): JsonResponse
     {
         $post = Post::where('uuid', $id)->first();
-        if (! $post) {
+        if (!$post) {
             return $this->error(ResponseMessages::NOT_FOUND, 404);
         }
 
@@ -53,7 +48,7 @@ class PostController extends Controller
     {
         $post = Post::where('user_id', auth()->user()->id)->where('uuid', $uuid)->first();
 
-        if (! $post) {
+        if (!$post) {
             return $this->error(ResponseMessages::NOT_FOUND, 404);
         }
         $post->update([
@@ -75,7 +70,7 @@ class PostController extends Controller
     public function destroy($uuid): JsonResponse
     {
         $post = Post::where('user_id', auth()->user()->id)->where('uuid', $uuid)->first();
-        if (! $post) {
+        if (!$post) {
             return $this->error(ResponseMessages::NOT_FOUND, 404);
         }
         $post->delete();
