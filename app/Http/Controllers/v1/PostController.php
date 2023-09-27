@@ -8,6 +8,7 @@ use App\Http\Resources\PostResource;
 use App\Models\Post;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Tymon\JWTAuth\Http\Parser\InputSource;
 
 class PostController extends Controller
 {
@@ -81,5 +82,16 @@ class PostController extends Controller
         $post->delete();
 
         return $this->success();
+    }
+
+    public function search($product_name): JsonResponse
+    {
+        $posts = Post::where("product_name", "LIKE", "%".$product_name."%")->get();
+
+        if ($posts->count() > 0) {
+            return $this->success(data: PostResource::collection($posts));
+        }
+
+        return $this->error('Not Found', 404);
     }
 }
