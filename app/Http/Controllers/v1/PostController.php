@@ -17,6 +17,12 @@ class PostController extends Controller
         return $this->success(data: PostResource::collection($posts));
     }
 
+    public function getAllPost(): JsonResponse
+    {
+        $posts = Post::all();
+        return $this->success(data: PostResource::collection($posts));
+    }
+
     public function store(Request $request): JsonResponse
     {
         $post = Post::create([

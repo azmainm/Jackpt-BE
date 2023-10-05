@@ -38,6 +38,7 @@ Route::group(['middleware' => ['auth:api', 'php.ini'], 'prefix' => 'v1', 'namesp
 });
 
 Route::group(['middleware' => ['auth:api', 'php.ini'], 'prefix' => 'v1/posts'], function () {
+    Route::get('/all', [PostController::class, 'getAllPost']);
     Route::get('', [PostController::class, 'index']);
     Route::post('', [PostController::class, 'store']);
     Route::get('{id}', [PostController::class, 'show']);
