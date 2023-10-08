@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             //            CountrySeeder::class,
             UserSeeder::class,
+            PostsSeeder::class,
             //            AnnualWheelRingSeeder::class,
         ]);
     }
