@@ -84,9 +84,9 @@ class PostController extends Controller
         return $this->success();
     }
 
-    public function search($product_name): JsonResponse
+    public function search($string): JsonResponse
     {
-        $posts = Post::where("product_name", "LIKE", "%".$product_name."%")->get();
+        $posts = Post::where("product_name", "LIKE", "%".$string."%")->orwhere('category', $string)->get();
 
         if ($posts->count() > 0) {
             return $this->success(data: PostResource::collection($posts));
