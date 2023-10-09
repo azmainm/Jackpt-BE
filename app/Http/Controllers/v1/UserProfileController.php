@@ -12,6 +12,7 @@ class UserProfileController extends Controller
      */
     public function userProfile(): JsonResponse
     {
+
         return $this->success(data: ['data' => auth()->user()]);
     }
 }
