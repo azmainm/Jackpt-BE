@@ -32,7 +32,7 @@ class Post extends Model
         'division',
         'district',
         'area',
-        'price'
+        'price',
     ];
 
     public function offers()

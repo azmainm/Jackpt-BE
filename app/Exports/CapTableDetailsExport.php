@@ -14,7 +14,7 @@ use Maatwebsite\Excel\Concerns\WithStyles;
 use Maatwebsite\Excel\Events\AfterSheet;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class CapTableDetailsExport implements WithHeadings, WithEvents, FromCollection, WithCustomStartCell, ShouldAutoSize, WithStyles
+class CapTableDetailsExport implements FromCollection, ShouldAutoSize, WithCustomStartCell, WithEvents, WithHeadings, WithStyles
 {
     public function __construct(
         protected array $details,
