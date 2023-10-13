@@ -19,6 +19,8 @@ class UserSeeder extends Seeder
     {
         $users = [
             ['name' => 'Tamanna', 'email' => 'tamanna@gmail.com'],
+            ['name' => 'Foysal', 'email' => 'rahman@tikweb.com'],
+            ['name' => 'Tamanna', 'email' => 'tamanna@gmail.com'],
         ];
         foreach ($users as $user) {
             (new UserRepository())->create([
