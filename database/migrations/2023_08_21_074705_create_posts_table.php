@@ -21,6 +21,9 @@ return new class extends Migration
             $table->string('category')->nullable();
             $table->string('type')->nullable();
             $table->string('price')->nullable();
+            $table->string('division')->nullable();
+            $table->string('district')->nullable();
+            $table->string('area')->nullable();
             $table->timestamps();
         });
     }

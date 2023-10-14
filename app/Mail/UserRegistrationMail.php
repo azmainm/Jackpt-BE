@@ -32,7 +32,7 @@ class UserRegistrationMail extends Mailable
     public function envelope()
     {
         return new Envelope(
-            from: new Address('no-reply@vutal.com', 'Vutal'),
+            from: new Address('no-reply@jackput.com', 'Jackpt'),
             subject: 'Verify Your Mail',
         );
     }
