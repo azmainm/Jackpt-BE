@@ -89,14 +89,19 @@ class PostController extends Controller
 
     public function search(Request $request): JsonResponse
     {
-        $posts = Post::where("product_name", "LIKE", "%" . $request->input('product_name') . "%");
-        if ($request->input('category')) {
+        $posts = Post::query();
+
+        if ($request->has('category')) {
             $posts = $posts->whereIn('category', $request->input('category'));
         }
-        if ($request->input('location')) {
+        if ($request->has('location')) {
             $posts = $posts->whereIn('location', $request->input('location'));
         }
+        if( $request->has('product_name')) {
+            $posts = $posts->where('product_name', 'like', '%' . $request->input('product_name') . '%');
+        }
         $posts = $posts->get();
+
         if ($posts->count() > 0) {
             return $this->success(data: PostResource::collection($posts));
         }

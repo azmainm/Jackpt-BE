@@ -44,7 +44,7 @@ Route::group(['middleware' => ['auth:api', 'php.ini'], 'prefix' => 'v1/posts'], 
     Route::get('{id}', [PostController::class, 'show']);
     Route::put('{id}', [PostController::class, 'update']);
     Route::delete('{id}', [PostController::class, 'destroy']);
-    Route::get('search/{string}', [PostController::class, 'search']);
+    Route::get('search', [PostController::class, 'search']);
 });
 
 Route::group(['middleware' => ['auth:api', 'php.ini'], 'prefix' => 'v1/offers'], function () {
