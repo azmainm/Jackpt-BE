@@ -28,6 +28,7 @@ class PostsSeeder extends Seeder
                 'division' => $faker->word(),
                 'district' => $faker->word(),
                 'area' => $faker->word(),
+                'price' => $faker->word()
             ]);
         }
 

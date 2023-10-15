@@ -19,6 +19,10 @@ return new class extends Migration
             $table->string('product_name')->nullable();
             $table->longText('product_details')->nullable();
             $table->string('category')->nullable();
+            $table->string('division')->nullable();
+            $table->string('district')->nullable();
+            $table->string('price')->nullable();
+            $table->string('area')->nullable();
             $table->string('type')->nullable();
             $table->timestamps();
         });

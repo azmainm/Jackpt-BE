@@ -9,6 +9,7 @@ use App\Models\Post;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Http\Parser\InputSource;
+use function Webmozart\Assert\Tests\StaticAnalysis\null;
 
 class PostController extends Controller
 {
@@ -67,6 +68,7 @@ class PostController extends Controller
             'division' => $request->division,
             'district' => $request->district,
             'area' => $request->area,
+            'price' => $request->price
         ]);
 
         return $this->success();
@@ -84,9 +86,21 @@ class PostController extends Controller
         return $this->success();
     }
 
-    public function search($string): JsonResponse
+    public function search(Request $request): JsonResponse
     {
-        $posts = Post::where("product_name", "LIKE", "%".$string."%")->orwhere('category', $string)->get();
+        $posts = Post::query();
+//        $posts = Post::where("product_name", "LIKE", "%" . $request->input('product_name') . "%");
+        if ($request->has('category')) {
+            $posts = $posts->whereIn('category', $request->input('category'));
+        }
+        if ($request->has('location')) {
+            $posts = $posts->whereIn('location', $request->input('location'));
+        }
+        if( $request->has('product_name')) {
+            echo "yo";
+            $posts = $posts->where('product_name', 'like', '%' . $request->input('product_name') . '%');
+        }
+        $posts = $posts->get();
 
         if ($posts->count() > 0) {
             return $this->success(data: PostResource::collection($posts));
@@ -94,4 +108,6 @@ class PostController extends Controller
 
         return $this->error('Not Found', 404);
     }
+
+
 }
