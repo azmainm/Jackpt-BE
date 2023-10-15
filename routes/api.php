@@ -38,12 +38,13 @@ Route::group(['middleware' => ['auth:api', 'php.ini'], 'prefix' => 'v1', 'namesp
 });
 
 Route::group(['middleware' => ['auth:api', 'php.ini'], 'prefix' => 'v1/posts'], function () {
+    Route::get('/search', [PostController::class, 'search']);
     Route::get('', [PostController::class, 'index']);
     Route::post('', [PostController::class, 'store']);
-//    Route::get('{id}', [PostController::class, 'show']);
+    Route::get('/{id}', [PostController::class, 'show']);
     Route::put('{id}', [PostController::class, 'update']);
     Route::delete('{id}', [PostController::class, 'destroy']);
-    Route::get('search', [PostController::class, 'search']);
+    Route::get('/search', [PostController::class, 'search']);
 
 });
 
