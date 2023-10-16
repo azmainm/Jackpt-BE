@@ -36,6 +36,7 @@ class PostController extends Controller
             'division' => $request->division,
             'district' => $request->district,
             'area' => $request->area,
+            'price' => $request->price
         ]);
 
         return $this->success(data: new PostResource($post));
