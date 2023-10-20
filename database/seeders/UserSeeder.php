@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
     public function run()
     {
         $users = [
-            ['name' => 'Tamanna', 'email' => 'tamanna@gmail.com'],
+            ['name' => 'Tamanna', 'email' => 'tamanna424101@gmail.com'],
         ];
         foreach ($users as $user) {
             (new UserRepository())->create([

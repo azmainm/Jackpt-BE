@@ -64,3 +64,6 @@ Route::group(['middleware' => ['auth:api', 'php.ini'], 'prefix' => 'v1/issues'],
 //});
 
 Route::post('/mails',[\App\Http\Controllers\v1\SendMailController::class, 'sendMail']);
+
+Route::post('/forgot-password',[\App\Http\Controllers\v1\PasswordResetController::class, 'forgotPassword']);
+Route::put('/reset-password',[\App\Http\Controllers\v1\PasswordResetController::class, 'resetPassword']);

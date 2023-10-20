@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use function App\Helpers\storeUuid;
 
-class Issue extends Model
+class  Issue extends Model
 {
     use HasFactory;
 
