@@ -58,3 +58,5 @@ Route::group(['middleware' => ['auth:api', 'php.ini'], 'prefix' => 'v1/issues'],
     Route::get('', [IssueController::class, 'view']);
     Route::post('', [IssueController::class, 'store']);
 });
+Route::post('/forgot-password',[\App\Http\Controllers\v1\PasswordResetController::class, 'forgotPassword']);
+Route::put('/reset-password',[\App\Http\Controllers\v1\PasswordResetController::class, 'resetPassword']);
