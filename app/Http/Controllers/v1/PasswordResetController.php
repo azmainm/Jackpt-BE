@@ -20,10 +20,10 @@ class PasswordResetController extends Controller
     public function forgotPassword(Request $request): JsonResponse
     {
         try {
-            $user = User::where('email', $request->email)->get();
+            $user = User::where('email', $request->email)->first();
 
-            if(count($user) > 0){
-                $token = Str::random(15);
+            if($user){
+                $token = $user->secret_key;
                 $domain = URL::to('/');
                 $url = $domain.'/reset-password?token='.$token;
 
@@ -55,10 +55,12 @@ class PasswordResetController extends Controller
                 return $this->success( "The link to reset your password is sent to your email.");
             }
             else{
+                echo "inner";
                 return $this->error(ResponseMessages::NOT_FOUND, 404);
             }
         }catch (\Exception $e){
-            return $this->error(ResponseMessages::NOT_FOUND, 404);
+            echo "outer";
+            return $this->error($e->getMessage());
         }
 
     }
