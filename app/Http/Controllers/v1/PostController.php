@@ -32,7 +32,7 @@ class PostController extends Controller
             'image' => $request->image,
             'product_name' => $request->product_name,
             'product_details' => $request->product_details,
-            'category' => $request->category,
+            'category' => json_encode($request->category),
             'type' => $request->type,
             'division' => $request->division,
             'district' => $request->district,

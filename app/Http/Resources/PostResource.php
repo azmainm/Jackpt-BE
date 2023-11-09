@@ -19,7 +19,7 @@ class PostResource extends JsonResource
             'image' => $this->image,
             'product_name' => $this->product_name,
             'product_details' => $this->product_details,
-            'category' => $this->category,
+            'category' => $this->category?json_decode($this->category):[],
             'type' => $this->type,
             'division' => $this->division,
             'district' => $this->district,
