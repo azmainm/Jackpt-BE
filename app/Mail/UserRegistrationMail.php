@@ -44,7 +44,7 @@ class UserRegistrationMail extends Mailable
      */
     public function content()
     {
-        $link = config('client.client_url').'/verification?key='.$this->data->secret_key;
+        $link = config('client.client_url').'verification?key='.$this->data->secret_key;
 
         return new Content(
             view: 'registerUserMail',
