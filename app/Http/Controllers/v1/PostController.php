@@ -28,7 +28,7 @@ class PostController extends Controller
     public function store(Request $request): JsonResponse
     {
         if ($request->input('image') != null) {
-            $imageData = $request->input('image_data');
+            $imageData = $request->input('image');
 
             // Extract the base64 image data and decode it
             list($type, $data) = explode(';', $imageData);
