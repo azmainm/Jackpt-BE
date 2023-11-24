@@ -49,7 +49,7 @@ class PostController extends Controller
             'product_details' => $request->product_details,
             'category' => json_encode($request->category),
             'type' => $request->type,
-//            'division' => $request->division,
+            'division' => $request->division,
             'district' => $request->district,
             'area' => $request->area,
             'price' => $request->price,
