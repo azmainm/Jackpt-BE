@@ -27,9 +27,24 @@ class PostController extends Controller
 
     public function store(Request $request): JsonResponse
     {
+        if ($request->input('image') != null) {
+            $imageData = $request->input('image_data');
+
+            // Extract the base64 image data and decode it
+            list($type, $data) = explode(';', $imageData);
+            list(, $data) = explode(',', $data);
+            $imageData = base64_decode($data);
+
+            // Generate a unique filename for the image
+            $imageName = 'image_' . time() . '.png';
+
+            // Specify the path where you want to save the image
+            $path = public_path('images/' . $imageName);
+            file_put_contents($path, $imageData);
+        }
         $post = Post::create([
             'user_id' => auth()->user()->id,
-            'image' => $request->image,
+            'image' => $path ?? null,
             'product_name' => $request->product_name,
             'product_details' => $request->product_details,
             'category' => json_encode($request->category),
@@ -98,7 +113,7 @@ class PostController extends Controller
         if ($request->has('location')) {
             $posts = $posts->whereIn('location', $request->input('location'));
         }
-        if( $request->has('product_name')) {
+        if ($request->has('product_name')) {
             $posts = $posts->where('product_name', 'like', '%' . $request->input('product_name') . '%');
         }
         $posts = $posts->get();
