@@ -39,12 +39,14 @@ class PostController extends Controller
             $imageName = 'image_' . time() . '.png';
 
             // Specify the path where you want to save the image
-            $path = public_path('images/' . $imageName);
+            $filePath = 'images/' . $imageName . random_int(1, 999999);
+            $path = public_path($filePath);
+
             file_put_contents($path, $imageData);
         }
         $post = Post::create([
             'user_id' => auth()->user()->id,
-            'image' => $path ?? null,
+            'image' => $filePath ?? null,
             'product_name' => $request->product_name,
             'product_details' => $request->product_details,
             'category' => json_encode($request->category),

@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\URL;
 
 class PostResource extends JsonResource
 {
@@ -16,7 +17,7 @@ class PostResource extends JsonResource
     {
         return [
             'id' => $this->uuid,
-            'image' => $this->image,
+            'image' => URL::asset($this->image),
             'product_name' => $this->product_name,
             'product_details' => $this->product_details,
             'category' => $this->category?json_decode($this->category):[],
